@@ -1,6 +1,6 @@
 class ProfessionalChat {
     constructor() {
-        this.socket = io('http://localhost:5000'); // Change to your backend URL
+        this.socket = io('professional-web-chat-production.up.railway.app'); // Change to your backend URL
         this.currentUser = null;
         this.selectedContact = null;
         this.messages = [];
