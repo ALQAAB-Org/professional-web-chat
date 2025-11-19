@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Web Chat</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Login Screen -->
+        <div id="loginScreen" class="login-screen">
+            <div class="login-container">
+                <h2>Welcome to Web Chat</h2>
+                <div class="google-login" onclick="googleLogin()">
+                    <span class="material-icons">mail</span>
+                    Login with Google
+                </div>
+                <div class="email-login">
+                    <input type="email" id="emailInput" placeholder="Enter your email">
+                    <input type="text" id="nameInput" placeholder="Your name">
+                    <button onclick="emailLogin()">Start Chatting</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Chat Interface -->
+        <div id="chatScreen" class="chat-screen hidden">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <div class="user-info">
+                        <img id="userAvatar" src="" alt="Avatar">
+                        <span id="userName">User</span>
+                    </div>
+                    <div class="sidebar-actions">
+                        <span class="material-icons" onclick="showUserMenu()">more_vert</span>
+                    </div>
+                </div>
+                
+                <div class="search-box">
+                    <input type="text" id="searchContacts" placeholder="Search contacts...">
+                </div>
+                
+                <div class="contacts-list" id="contactsList">
+                    <!-- Contacts will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Chat Area -->
+            <div class="chat-area">
+                <div class="chat-header">
+                    <div class="chat-user-info">
+                        <img id="chatUserAvatar" src="" alt="Avatar">
+                        <div>
+                            <span id="chatUserName">Select a contact</span>
+                            <span id="userStatus" class="user-status">offline</span>
+                        </div>
+                    </div>
+                    <div class="chat-actions">
+                        <span class="material-icons" onclick="showChatMenu()">more_vert</span>
+                    </div>
+                </div>
+
+                <div class="messages-container" id="messagesContainer">
+                    <!-- Messages will appear here -->
+                </div>
+
+                <!-- Typing Indicator -->
+                <div id="typingIndicator" class="typing-indicator hidden">
+                    <span>typing...</span>
+                </div>
+
+                <!-- Message Input -->
+                <div class="message-input-container">
+                    <div class="input-actions">
+                        <span class="material-icons" onclick="toggleEmojiPicker()">emoji_emotions</span>
+                        <span class="material-icons" onclick="triggerImageUpload()">attach_file</span>
+                    </div>
+                    <div class="text-input-wrapper">
+                        <textarea 
+                            id="messageInput" 
+                            placeholder="Type a message..."
+                            rows="1"
+                            oninput="autoResizeTextarea(this)"
+                        ></textarea>
+                    </div>
+                    <div class="send-actions">
+                        <span class="material-icons" onclick="sendMessage()">send</span>
+                    </div>
+                    
+                    <!-- Hidden file input -->
+                    <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Emoji Picker -->
+    <div id="emojiPicker" class="emoji-picker hidden">
+        <div class="emoji-grid">
+            <span onclick="addEmoji('😀')">😀</span>
+            <span onclick="addEmoji('😂')">😂</span>
+            <span onclick="addEmoji('❤️')">❤️</span>
+            <span onclick="addEmoji('👍')">👍</span>
+            <span onclick="addEmoji('🎉')">🎉</span>
+            <span onclick="addEmoji('🙏')">🙏</span>
+        </div>
+    </div>
+
+    <!-- Message Context Menu -->
+    <div id="messageContextMenu" class="context-menu hidden">
+        <div class="menu-item" onclick="copyMessage()">Copy</div>
+        <div class="menu-item" onclick="deleteMessage()">Delete</div>
+        <div class="menu-item" onclick="forwardMessage()">Forward</div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
