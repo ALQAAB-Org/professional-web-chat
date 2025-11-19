@@ -1,0 +1,9 @@
+[build]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "node server.js"
+
+[variables]
+MONGODB_URI = "mongodb+srv://learnonline826_db_user:9YoxqotxzbYetKi0@cluster0.9v30nto.mongodb.net/chatdb?retryWrites=true&w=majority&appName=Cluster0"
+PORT = "5000"
